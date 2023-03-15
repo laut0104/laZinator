@@ -37,14 +37,8 @@ services:
       - -c
       - |
         npm install
-        ng serve --host 0.0.0.0
-    
-    command:
-      - -c
-      - |
-        npm install
         ng serve --host 0.0.0.0 --disable-host-check
-
+    
   # postgres:
   #   image: postgres
   #   ports:
