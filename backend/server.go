@@ -5,6 +5,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"github.com/laut0104/laZinator/handler"
 	_ "github.com/lib/pq"
 
 	"fmt"
@@ -21,6 +22,7 @@ func main() {
 
 	e.Use(middleware.CORS())
 	e.GET("/", hello)
+	e.POST("/callback", handler.Line)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
