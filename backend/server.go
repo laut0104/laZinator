@@ -47,6 +47,8 @@ func main() {
 	e.POST("/callback", handler.Line)
 	e.GET("/auth/line/callback", login)
 	e.GET("/user", handler.GetUser)
+	e.POST("/cloth", handler.AddCloth)
+	e.GET("/clothes", handler.GetClothes)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
