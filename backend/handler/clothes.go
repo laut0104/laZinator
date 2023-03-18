@@ -100,3 +100,17 @@ func UpdateCloth(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, cloth)
 }
+
+func DeleteCloth(c echo.Context) error {
+	id := c.Param("id")
+	uid := c.QueryParam("id")
+
+	db := OpenDB()
+	defer db.Close()
+	_, err := db.Exec(`DELETE FROM clothes WHERE id=$1 AND userid=$2`, id, uid)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	return c.NoContent(http.StatusOK)
+}
