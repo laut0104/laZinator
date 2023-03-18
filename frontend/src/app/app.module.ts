@@ -5,11 +5,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LiffInitComponent } from './pages/liff-init/liff-init.component';
 import { HttpRequestInterceptor } from './interceptors/http.interceptor';
+import { Routes } from '@angular/router';
+
+
+import { CodeListComponent } from './Pages/code-list/code-list.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HeaderComponent } from './Pages/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LiffInitComponent
+    LiffInitComponent,
+    CodeListComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,6 +30,7 @@ import { HttpRequestInterceptor } from './interceptors/http.interceptor';
       useClass: HttpRequestInterceptor,
       multi: true,
     },
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })
