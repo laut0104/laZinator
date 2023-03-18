@@ -50,6 +50,22 @@ func GetClothes(c echo.Context) error {
 	return c.JSON(http.StatusOK, clothes)
 }
 
+func GetCloth(c echo.Context) error {
+	db := OpenDB()
+	defer db.Close()
+	id := c.Param("id")
+	uid := c.QueryParam("id")
+	cloth := new(Cloth)
+	err := db.QueryRow(`SELECT * FROM clothes where id=$1 and userid=$2 `, id, uid).Scan(&cloth.Id, &cloth.Userid, &cloth.Cloth, &cloth.Details, &cloth.Weather, &cloth.Temperature, &cloth.Events)
+	if err != nil {
+		fmt.Println("db_err")
+		fmt.Println(err)
+	}
+
+	fmt.Println(cloth)
+	return c.JSON(http.StatusOK, cloth)
+}
+
 func AddCloth(c echo.Context) error {
 	cloth := new(Cloth)
 	if err := c.Bind(cloth); err != nil {
@@ -58,7 +74,7 @@ func AddCloth(c echo.Context) error {
 	db := OpenDB()
 	defer db.Close()
 
-	_, err := db.Exec(`INSERT INTO clothes (userid, cloth, details, weather, temperature, events) VALUES($1, $2, $3, $4, $5, $6)`, cloth.Userid, cloth.Cloth, &cloth.Details, &cloth.Weather, &cloth.Temperature, &cloth.Events)
+	_, err := db.Exec(`INSERT INTO clothes (userid, cloth, details, weather, temperature, events) VALUES($1, $2, $3, $4, $5, $6)`, cloth.Userid, cloth.Cloth, cloth.Details, cloth.Weather, cloth.Temperature, cloth.Events)
 	if err != nil {
 		fmt.Println(err)
 		return err
