@@ -81,3 +81,22 @@ func AddCloth(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, cloth)
 }
+
+func UpdateCloth(c echo.Context) error {
+	cloth := new(Cloth)
+	id := c.Param("id")
+	if err := c.Bind(cloth); err != nil {
+		return err
+	}
+	db := OpenDB()
+	defer db.Close()
+
+	_, err := db.Exec(`UPDATE clothes SET (cloth, details, weather, temperature, events)=($1, $2, $3, $4, $5) WHERE id=$6 AND userid=$7`, cloth.Cloth, cloth.Details, cloth.Weather, cloth.Temperature, cloth.Events, id, cloth.Userid)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	fmt.Println(cloth)
+
+	return c.JSON(http.StatusOK, cloth)
+}
