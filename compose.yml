@@ -35,7 +35,7 @@ services:
       - -c
       - |
         npm install
-        ng serve --host 0.0.0.0 --disable-host-check
+        ng serve --host 0.0.0.0 --disable-host-check --hmr --proxy-config proxy.conf.json
     
   postgres:
     image: postgres
