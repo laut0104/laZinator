@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  ngrokSkipBrowserWarning: true,
+  apiUrl: '/api',
+  LIFF_ID: '1660758429-GMo1JYaa',
 };
 
 /*
