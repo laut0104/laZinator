@@ -29,7 +29,6 @@ func Getjwt(name, uid string) string {
 	fmt.Println(ss)
 	if err != nil {
 		fmt.Println(err)
-		// return err
 	}
 	return ss
 }
