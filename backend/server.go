@@ -49,6 +49,7 @@ func main() {
 	e.GET("/user", handler.GetUser)
 	e.POST("/cloth", handler.AddCloth)
 	e.GET("/clothes", handler.GetClothes)
+	e.GET("/cloth/:id", handler.GetCloth)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
