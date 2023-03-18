@@ -50,6 +50,7 @@ func main() {
 	e.POST("/cloth", handler.AddCloth)
 	e.GET("/clothes", handler.GetClothes)
 	e.GET("/cloth/:id", handler.GetCloth)
+	e.PUT("/cloth/:id", handler.UpdateCloth)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
