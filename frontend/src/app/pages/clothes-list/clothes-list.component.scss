@@ -1,55 +1,4 @@
 @use "src/styles/styles";
-
-
-.codelist_top{
-  display: flex;
-  justify-content:space-around;
-}
-
-.new_create_button{
-  width: 150px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  color: white;
-  background-color: purple;
-}
-
-h1{
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-.codelist_top .h1{
-  margin: auto;
-  text-align: center;
-}
-
-.filter{
-  display: flex;
-  justify-content: flex-end;
-}
-
-.filter_button{
-  margin-right: 15px;
-  color: purple;
-}
-
-.codelist_all_image{
-  width: 100%;
-  display: block;
-}
-
-ul{
-  list-style: none;
-  display: flex;
-}
-
-ul li{
-  width: 50%;
-  text-align: center;
-}
-
-
 .container {
   @include styles.container;
   min-height: 100vh;
@@ -75,13 +24,9 @@ ul li{
     flex-wrap: wrap;
     justify-content: space-between;
     .example-card {
-      flex: 1,1;
       display: block;
-      // margin-left: 5px;
-      // margin-right: 10px;
       width: 35%;
-      height: auto;
-      margin: 5px;
+      margin: 10px;
     }
     .code_editer_button{
       text-align: right;
@@ -97,5 +42,51 @@ ul li{
       color: red;
     }
   }
+  .codelist_top{
+    display: flex;
+    justify-content:space-around;
+  }
 
+  .new_create_button{
+    width: 150px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    color: white;
+    background-color: purple;
+  }
+
+  h1{
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .codelist_top .h1{
+    margin: auto;
+    text-align: center;
+  }
+
+  .filter{
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .filter_button{
+    margin-right: 15px;
+    color: purple;
+  }
+
+  .codelist_all_image{
+    width: 100%;
+    display: block;
+  }
+
+  ul{
+    list-style: none;
+    display: flex;
+  }
+
+  ul li{
+    width: 50%;
+    text-align: center;
+  }
 }
