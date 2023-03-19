@@ -9,13 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { ClothesListComponent } from './pages/clothes-list/clothes-list.component';
+import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LiffInitComponent,
     HeaderComponent,
-    ClothesListComponent
+    ClothesListComponent,
+    ClothesAddComponent
   ],
   imports: [
     BrowserModule,
