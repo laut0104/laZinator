@@ -14,8 +14,8 @@ func Line(c echo.Context) error {
 	bot, err := linebot.New(
 		// 	// os.Getenv("LINE_BOT_CHANNEL_SECRET"),
 		// 	// os.Getenv("LINE_BOT_CHANNEL_TOKEN"),
-		"0eeb5550fe74acad428d9dcde42f2684",
-		"2OeWynHvMPKxzpumMLjBEqjP/LIx0wUFH9K4CodnbFpJcp+bZdY/xHbIPuRSavlvMt6etI9WzhVynW38pwjCNl4qMp8EVdAnWIMJ/T1nIunYKuJUONcoyrUXMnNHXoP5Cjr7TTSf+VWea/d9XbektAdB04t89/1O/w1cDnyilFU=",
+		"5b1d1d4c7a2043e1eab658c55c9a3f09",
+		"RX7+1wW7sQxtIBs1Aa5zNLUJGNoJyaf5BTIU0dsUlNl713OtA3p+8AEhUD56AeK50RPsEDvlK9tDdTsSgcM5q08TYbVloDJk+I+Ny/t9dNNVwVF/yPTYKL6TsReqdXEF8iD7TojNzIinyLoJKMX87QdB04t89/1O/w1cDnyilFU=",
 	)
 	events, err := bot.ParseRequest(c.Request())
 	if err != nil {

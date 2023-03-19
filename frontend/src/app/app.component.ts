@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { MatIconRegistry } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'テスト';
+  constructor(
+    private matIconRegistry: MatIconRegistry ,
+    private domSanitizer: DomSanitizer,) {
+    
+      this.matIconRegistry.addSvgIcon(
+        "unicorn",
+        this.domSanitizer.bypassSecurityTrustResourceUrl("../assets/unicorn_icon.svg"));}
 }

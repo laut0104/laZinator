@@ -1,0 +1,38 @@
+
+    .codelist_top{
+        display: flex;
+        justify-content:space-around;
+        height: 40px;
+    }
+    
+    .new_create_button{
+        width: 150px;
+        height: auto;
+    }
+    
+    .codelist_top .h1{
+        margin: auto;
+        text-align: center;
+    }
+    .filter{
+        display: flex;
+        justify-content: flex-end;
+    }
+    .filter_button{
+        margin: 15px;
+    }
+
+    .codelist_all_image{
+        width: 100%;
+        display: block;
+    }
+
+    ul{
+        list-style: none;
+        display: flex;
+    }
+
+    ul li{
+        width: 50%;
+        text-align: center;
+    }

@@ -1,4 +1,8 @@
-.example-spacer {
-    flex: 1 1 auto;
+.header{
+  background-color: white;
+  border-bottom: solid purple;
+  .account_setting_button{
+    margin-left: auto;
     
   }
+}
