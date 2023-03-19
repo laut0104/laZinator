@@ -1,10 +1,10 @@
 {
   "/api/*": {
-    "target": "https://4c12-43-234-17-93.jp.ngrok.io",
+    "target": "https://b59c-43-234-17-93.jp.ngrok.io",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/api": "https://4c12-43-234-17-93.jp.ngrok.io/"
+    "^/api": " https://b59c-43-234-17-93.jp.ngrok.io/"
     },
     "logLevel": "debug"
   }
