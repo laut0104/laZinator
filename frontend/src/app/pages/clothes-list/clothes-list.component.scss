@@ -79,16 +79,22 @@ ul li{
       display: block;
       // margin-left: 5px;
       // margin-right: 10px;
-      width: 40%;
+      width: 35%;
       height: auto;
       margin: 5px;
     }
-    .mat-card-actions{
-      margin-left: 120px;
+    .code_editer_button{
+      text-align: right;
     }
     .tags{
       display: flex;
       align-items: center;
+    }
+    #edit_button{
+      color: green;
+    }
+    #delete_button{
+      color: red;
     }
   }
 
