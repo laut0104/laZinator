@@ -59,3 +59,6 @@ testem.log
 Thumbs.db
 
 docker/data
+
+frontend/proxy.conf.json
+/proxy.conf.json
