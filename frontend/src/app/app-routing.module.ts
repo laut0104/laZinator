@@ -10,11 +10,11 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     component: LiffInitComponent,
   },
-  {
-    path: 'clothes-list',
-    canActivate: [AuthGuard],
-    component: ClothesListComponent,
-  },
+  // {
+  //   path: 'clothes-list',
+  //   canActivate: [AuthGuard],
+  //   component: ClothesListComponent,
+  // },
 ];
 
 @NgModule({
