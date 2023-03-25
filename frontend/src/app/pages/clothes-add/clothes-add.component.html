@@ -1,17 +1,18 @@
 <app-header></app-header>
 <div class="container">
   <div class="page-title">
-    <button mat-icon-button class="back">
+    <div class="back-button">
+      <button mat-icon-button class="back">
       <mat-icon>
-        arrow_back_ios_new
+          arrow_back_ios_new
       </mat-icon>
-      戻る
-    </button>
+      </button>
+      <div class="back-title">戻る</div>
+    </div>
     <h2 class="title">コーデの情報を入力</h2>
   </div>
-  <form class ="form" [formGroup]="clothForm" >
+  <form class ="form" [formGroup]="clothForm">
   <div class="clothes">
-    <!-- <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate.value)"> -->
       <div class="text-center">
           <img [src]="imgSrc" width="300px" height="200px" (click)="fileUploader.click()">
       </div>
@@ -20,7 +21,6 @@
           <input type="file" accept="image/png,image/jpg" class="form-control" #fileUploader formControlName="imageUrl" (change)="showPreview($event)">
           <div class="text-danger" *ngIf="isSubmitted && formControls.imageUrl.errors?.['required']">画像を追加してください。</div>
       </div>
-    <!-- </form> -->
     <div class="editor">
       <div class="detail-title">
         コーデの詳細
@@ -29,23 +29,24 @@
         <mat-form-field multiple appearance="fill" class="form-block">
           <mat-label>サイズ</mat-label>
           <mat-select formControlName="size">
-            <mat-option value="XS">XS</mat-option>
-            <mat-option value="S">S</mat-option>
-            <mat-option value="M">M</mat-option>
-            <mat-option value="L">L</mat-option>
-            <mat-option value="XL">XL</mat-option>
+            <mat-option value="140-150cm">140-150cm</mat-option>
+            <mat-option value="150-160cm">150-160cm</mat-option>
+            <mat-option value="160-170cm">160-170cm</mat-option>
+            <mat-option value="170-180cm">170-180cm</mat-option>
+            <mat-option value="180-190cm">180-190cm</mat-option>
+            <mat-option value="190-200cm">190-200cm</mat-option>
           </mat-select>
+          <mat-error>必須入力です</mat-error>
         </mat-form-field>
-        <div class="form-title">トップス</div>
+        <div class="form-title">ブランド（トップス）</div>
         <mat-form-field class="name form-block" appearance="fill">
-          <mat-label>トップス</mat-label>
+          <mat-label>ブランド（トップス）</mat-label>
           <input matInput formControlName="tops">
         </mat-form-field>
-        <div class="form-title">ボトムス</div>
+        <div class="form-title">ブランド（ボトムス）</div>
         <mat-form-field class="name form-block" appearance="fill">
-          <mat-label>ボトムス</mat-label>
+          <mat-label>ブランド（ボトムス）</mat-label>
           <input matInput formControlName="bottoms">
-          <mat-error>必須入力です</mat-error>
         </mat-form-field>
         <ng-container class="form-title" formArrayName="temperature">
           <div class="title-button">
@@ -109,11 +110,12 @@
           <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let events of events.controls; let i=index">
             <mat-label>イベント</mat-label>
             <mat-select [formControlName]="i">
-              <mat-option value="sunny">晴れ</mat-option>
-              <mat-option value="rainy">雨</mat-option>
-              <mat-option value="cloudy">曇り</mat-option>
-              <mat-option value="snowy">雪</mat-option>
-              <mat-option value="all-weather">全て</mat-option>
+              <mat-option value="アウトドア（スポーツ、キャンプ）">アウトドア（スポーツ、キャンプ）</mat-option>
+              <mat-option value="インドア（カフェ、博物館）">インドア（カフェ、博物館）</mat-option>
+              <mat-option value="デート">デート</mat-option>
+              <mat-option value="グルメ">グルメ</mat-option>
+              <mat-option value="オフィス">オフィス</mat-option>
+              <mat-option value="カジュアル">カジュアル</mat-option>
             </mat-select>
             <mat-error>必須入力です</mat-error>
           </mat-form-field>
@@ -123,3 +125,4 @@
     </div>
   </form>
 </div>
+<app-footer></app-footer>

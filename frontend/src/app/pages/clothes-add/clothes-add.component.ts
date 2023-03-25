@@ -3,7 +3,6 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClothesRepoService } from 'src/app/repositories/clothes-repo.service';
 import { UserService } from 'src/app/services/user.service';
-import { FormControl, FormGroup } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { finalize } from 'rxjs/operators';
 
@@ -27,19 +26,16 @@ export class ClothesAddComponent implements OnInit {
     weather: this.fb.array([
       this.fb.control('', [
         Validators.required,
-        // Validators.pattern('[^/]+')
       ])
     ]),
     temperature: this.fb.array([
       this.fb.control('', [
         Validators.required,
-        // Validators.pattern('[^/]+')
       ])
     ]),
     events: this.fb.array([
       this.fb.control('', [
-        Validators.required,
-        // Validators.pattern('[^/]+')
+        Validators.required
       ])
     ])
   });
@@ -56,7 +52,6 @@ export class ClothesAddComponent implements OnInit {
 
   ngOnInit(){
     this.userId = this.userSvc.user$.getValue().id
-    this.resetFrom();
   }
 
   get weather() {
@@ -85,6 +80,11 @@ export class ClothesAddComponent implements OnInit {
     }
   }
   addEvents() {
+    if(this.events.length<6){
+      this.events.push(this.fb.control('', [
+        Validators.required,
+      ]));
+    }
     this.events.push(this.fb.control('', [
       Validators.required,
     ]));
@@ -103,30 +103,25 @@ export class ClothesAddComponent implements OnInit {
 
 
   createCloth() {
-    console.log(this.clothForm.value)
     const tops = this.clothForm.value.tops != '' ? this.clothForm.value.tops : "null"
     const bottoms = this.clothForm.value.bottoms != '' ? this.clothForm.value.bottoms : "null"
 
     this.details = '{' + this.clothForm.value.size + '|,' + tops + '|,' + bottoms + '}'
-    console.log(this.details)
 
     this.clothForm.value.temperature?.map((temperature) => {
       this.temperature_arr = this.temperature_arr + temperature + ','
     })
     this.temperature_arr = this.temperature_arr.slice(0,-1) + '}'
-    console.log(this.temperature_arr)
 
     this.clothForm.value.weather?.map((weather) => {
       this.weather_arr = this.weather_arr + weather + ','
     })
     this.weather_arr = this.weather_arr.slice(0,-1) + '}'
-    console.log(this.weather_arr)
 
     this.clothForm.value.events?.map((event) => {
       this.event_arr = this.event_arr + event + ','
     })
     this.event_arr = this.event_arr.slice(0,-1) + '}'
-    console.log(this.event_arr)
 
     const body = {
       'userid': this.userId,
@@ -137,18 +132,14 @@ export class ClothesAddComponent implements OnInit {
       "events": this.event_arr,
     }
     this.clothesRepoSvc.createCloth(body).subscribe(() => {
-      // this.router.navigate([`/menu-list`]);
+      // this.router.navigate([`/clothes-list`]);
     })
   }
 
-  imgSrc : string='../assets/placeholder.jpg';
+  imgSrc : string='../assets/images/placeholder.jpg';
   imgUrl : string | undefined;
   selectedImage: any = null;
   isSubmitted:boolean=false;
-
-  // formTemplate = new FormGroup({
-  //   imageUrl : new FormControl('',Validators.required),
-  // })
 
   showPreview(event:any){
     if(event.target.files && event.target.files[0]){
@@ -157,7 +148,7 @@ export class ClothesAddComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]);
       this.selectedImage = event.target.files[0];
     }else{
-      this.imgSrc = '../assets/placeholder.jpg';
+      this.imgSrc = '../assets/images/placeholder.jpg';
       this.selectedImage = null;
     }
   }
@@ -170,11 +161,9 @@ export class ClothesAddComponent implements OnInit {
       this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
         finalize(()=>{
           fileRef.getDownloadURL().subscribe((url)=>{
-            console.log(url);
-            this.imgUrl = url;
+            this.imgUrl = url.substr(0, url.indexOf('&'));
             this.createCloth();
             fromValue['imageUrl']=url;
-            this.resetFrom();
           })
         })
       ).subscribe();
@@ -183,21 +172,5 @@ export class ClothesAddComponent implements OnInit {
 
   get formControls(){
     return this.clothForm['controls'];
-  }
-
-  resetFrom(){
-    this.clothForm.reset();
-    this.clothForm.setValue({
-      imageUrl:'',
-    size: '',
-    tops: '',
-    bottoms: '',
-    weather: [],
-    temperature: [],
-    events: []
-    });
-    this.imgSrc = '../assets/placeholder.jpg';
-    this.selectedImage = null;
-    this.isSubmitted=false;
   }
 }
