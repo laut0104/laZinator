@@ -9,14 +9,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { ClothesListComponent } from './pages/clothes-list/clothes-list.component';
+import { ClothesEditComponent } from './pages/clothes-edit/clothes-edit.component';
+import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
 import { ImageComponent } from './pages/image/image.component';
-import { ReactiveFormsModule } from "@angular/forms";
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
     ClothesListComponent,
     FooterComponent,
     ImageComponent,
+    ClothesEditComponent,
+    ClothesAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
     AngularFireStorageModule,
     ReactiveFormsModule,
     AngularFireDatabaseModule,
+    FormsModule,
   ],
   providers: [
     {

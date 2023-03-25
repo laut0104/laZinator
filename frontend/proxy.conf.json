@@ -1,12 +1,11 @@
 {
   "/api/*": {
-    "target": "https://d1d6-222-150-98-53.jp.ngrok.io",
+    "target": "https://2ce9-103-5-140-185.jp.ngrok.io",
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-      "^/api": "https://d1d6-222-150-98-53.jp.ngrok.io/"
+    "^/api": "https://2ce9-103-5-140-185.jp.ngrok.io/"
     },
     "logLevel": "debug"
   }
 }
-
