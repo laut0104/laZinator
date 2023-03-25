@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LiffService } from 'src/app/services/liff.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  public icon: string = '../assets/images/icon_sample.png';
 
-  ngOnInit(): void {
+  constructor(
+    private liffSvc: LiffService,
+  ) { }
+
+  ngOnInit() {
+   this.getIcon()
+  }
+
+  async getIcon() {
+    const profile = await this.liffSvc.liff.getProfile()
+    if(profile.pictureUrl) this.icon = profile.pictureUrl;
   }
 
 }
