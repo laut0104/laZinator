@@ -1,0 +1,82 @@
+<app-header></app-header>
+<div class="container">
+  <div class="page-title">
+    <button mat-icon-button class="back">
+      <mat-icon>
+        arrow_back_ios_new
+      </mat-icon>
+      戻る
+    </button>
+    <h2 class="title">コーデの情報を入力</h2>
+  </div>
+  <div class="clothes">
+  <div class="img">
+    <img class="clothes-img" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+  </div>
+  <div class="editor">
+    <div class="detail-title">
+      コーデの詳細
+    </div>
+    <form class ="form">
+      <mat-form-field multiple appearance="fill" class="form-block">
+        <mat-label>サイズ</mat-label>
+        <mat-select>
+          <mat-option value="XS">XS</mat-option>
+          <mat-option value="S">S</mat-option>
+          <mat-option value="M">M</mat-option>
+          <mat-option value="L">L</mat-option>
+          <mat-option value="XL">XL</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="name form-block" appearance="fill">
+        <mat-label>ブランド</mat-label>
+        <input matInput formControlName="menuname">
+        <mat-error>必須入力です</mat-error>
+      </mat-form-field>
+      <mat-form-field class="name form-block" appearance="fill">
+        <mat-label>スタイル</mat-label>
+        <input matInput formControlName="menuname">
+        <mat-error>必須入力です</mat-error>
+      </mat-form-field>
+      <mat-form-field multiple appearance="fill" class="form-block">
+        <mat-label>季節</mat-label>
+        <mat-select>
+          <mat-option value="spring">春</mat-option>
+          <mat-option value="summer">夏</mat-option>
+          <mat-option value="autumn">秋</mat-option>
+          <mat-option value="winter">冬</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-block">
+        <mat-label>天気</mat-label>
+        <mat-select>
+          <mat-option value="sunny">晴れ</mat-option>
+          <mat-option value="rainy">雨</mat-option>
+          <mat-option value="cloudy">曇り</mat-option>
+          <mat-option value="snowy">雪</mat-option>
+          <mat-option value="all-weather">全て</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-block">
+        <mat-label>イベント</mat-label>
+        <input matInput formControlName="menuname">
+        <mat-error>必須入力です</mat-error>
+      </mat-form-field>
+      <!-- <div class="form-title">料理名</div>
+      <mat-form-field class="name" appearance="fill">
+        <mat-label>料理名</mat-label>
+        <input matInput formControlName="menuname">
+        <mat-error>必須入力です</mat-error>
+      </mat-form-field>
+      <ng-container class="recipes" formArrayName="recipes">
+        <div class="form-title">作り方</div>
+        <mat-form-field class="recipe"appearance="fill" *ngFor="let recipes of recipes.controls; let i=index">
+          <mat-label>手順{{i+1}}</mat-label>
+          <textarea matInput [formControlName]="i"></textarea>
+          <mat-error>必須入力です。（'/'は使用できません）</mat-error>
+        </mat-form-field>
+      </ng-container> -->
+    </form>
+    <button mat-raised-button color="primary" class="register-button">登録する</button>
+  </div>
+</div>

@@ -42,3 +42,8 @@ testem.log
 Thumbs.db
 
 proxy.conf.json
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

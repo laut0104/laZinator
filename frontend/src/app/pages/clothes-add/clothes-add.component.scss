@@ -1,0 +1,102 @@
+@use "src/styles/styles";
+
+.container {
+  @include styles.container;
+  padding-bottom: 80px;
+  .page-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.3em;
+    .back-button{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 0.2em;
+      margin-right: 0.7em;
+      .back{
+        margin-top: 0.7em;
+        margin-left: 1em;
+      }
+    }
+    .title{
+      margin-top: 1.4em;
+      text-align: center;
+      font-size: 20px;
+    }
+    .back-title {
+      margin-right: 1em;
+      margin-top: 0.7em;
+    }
+  }
+
+  .img {
+    display: flex;
+    justify-content: center;
+    margin-left: 2em;
+  }
+
+  .photo-add{
+    width: 70%;
+    margin: 0 auto;
+  }
+
+  .clothes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .example-card {
+      flex: 1,1;
+      width: 80%;
+    }
+  }
+
+  .title-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .title {
+      margin-right: 1em;
+    }
+    .button {
+      margin-bottom: 1em;
+      display: flex;
+      margin-top: 1em;
+      .add {
+        margin-right:0.6em;
+      }
+    }
+    .edit-button{
+      margin-left: 1.5em;
+      .add{
+        margin-right:0.8em;
+      }
+    }
+  }
+
+  .editor{
+    width: 80%;
+    margin:0 auto;
+    margin-bottom: 1em;
+  }
+
+  .detail-title{
+    margin-bottom: 1.5em;
+    margin-top: 3em;
+    border-bottom: 1px solid #652CB3;
+  }
+
+  .form-block{
+    display: block;
+    margin-bottom: 2em;
+  }
+
+  .register-button{
+    margin-top: 0.8em;
+    width: 60%;
+    margin: 0 auto;
+    display: block;
+  }
+
+}

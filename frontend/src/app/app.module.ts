@@ -9,7 +9,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { ClothesListComponent } from './pages/clothes-list/clothes-list.component';
+import { ClothesEditComponent } from './pages/clothes-edit/clothes-edit.component';
+import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { environment } from '../environments/environment';
+import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +25,9 @@ import { FooterComponent } from './components/footer/footer.component';
     LiffInitComponent,
     HeaderComponent,
     ClothesListComponent,
-    FooterComponent
+    FooterComponent,
+    ClothesEditComponent,
+    ClothesAddComponent,
   ],
   imports: [
     BrowserModule,
@@ -25,6 +35,12 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    ReactiveFormsModule,
+    AngularFireDatabaseModule,
+    FormsModule,
   ],
   providers: [
     {
