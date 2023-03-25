@@ -10,6 +10,7 @@ import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { ClothesListComponent } from './pages/clothes-list/clothes-list.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ClothesDetailsComponent } from './pages/clothes-details/clothes-details.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FooterComponent } from './components/footer/footer.component';
     LiffInitComponent,
     HeaderComponent,
     ClothesListComponent,
-    FooterComponent
+    FooterComponent,
+    ClothesDetailsComponent
   ],
   imports: [
     BrowserModule,
