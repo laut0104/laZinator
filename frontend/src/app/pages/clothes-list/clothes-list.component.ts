@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Cloth } from 'src/app/models/model';
 import { ClothesRepoService } from 'src/app/repositories/clothes-repo.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,6 +10,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class ClothesListComponent implements OnInit {
   public userId: number = 0;
+  public clothes: any[] = [];
+  public weathers: string[] = [];
 
   constructor(
     private userSvc: UserService,
@@ -22,16 +25,16 @@ export class ClothesListComponent implements OnInit {
   }
 
   public getClothes() {
-    const query = {
-      "id": this.userId
-    }
+    const query = {}
     this.clothesRepoSvc.getClothes(query).subscribe((res: any) => {
-      console.log(res)
+      if(res.clothes){
+        this.clothes = res.clothes;
+        this.clothes.forEach((cloth, index) => {
+          cloth.weather = cloth.weather.slice(1,-1)
+          this.clothes[index].weathers = cloth.weather.split(',')
+        })
+      }
     })
-  }
-
-  test() {
-    console.log('test')
   }
 
 }

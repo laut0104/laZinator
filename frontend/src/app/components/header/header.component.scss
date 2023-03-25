@@ -1,7 +1,10 @@
-.header {
-  background-color: gainsboro;
-  .logout-btn {
-    margin: 20px;
+.header{
+  background-color: white;
+  border-bottom: solid purple;
+  .account_setting_button{
     margin-left: auto;
+  }
+  .title{
+    font-size: 30px;
   }
 }

@@ -26,7 +26,8 @@ type Clothes struct {
 func GetClothes(c echo.Context) error {
 	db := OpenDB()
 	defer db.Close()
-	uid := c.QueryParam("id")
+
+	uid := c.Request().Header.Get("User_id")
 
 	rows, err := db.Query(`SELECT * FROM clothes where userid=$1`, uid)
 	if err != nil {

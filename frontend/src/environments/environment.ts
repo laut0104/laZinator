@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   ngrokSkipBrowserWarning: true,
   apiUrl: '/api',
-  LIFF_ID: '1660758429-GMo1JYaa',
+  LIFF_ID: '1660758429-leyZWamm',
 };
 
 /*
