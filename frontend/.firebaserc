@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "lazinator-demo": {
+      "hosting": {
+        "frontend": [
+          "lazinator-demo"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "lazinator-demo"
+  }
+}
