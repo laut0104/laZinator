@@ -9,109 +9,117 @@
     </button>
     <h2 class="title">コーデの情報を入力</h2>
   </div>
+  <form class ="form" [formGroup]="clothForm" >
   <div class="clothes">
-  <div class="img">
-    <img class="clothes-img" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  </div>
-  <div class="editor">
-    <div class="detail-title">
-      コーデの詳細
+    <!-- <form [formGroup]="formTemplate" (submit)="onSubmit(formTemplate.value)"> -->
+      <div class="text-center">
+          <img [src]="imgSrc" width="300px" height="200px" (click)="fileUploader.click()">
+      </div>
+      <div class="form-group" hidden>
+          <label>ファイルをアップロード</label>
+          <input type="file" accept="image/png,image/jpg" class="form-control" #fileUploader formControlName="imageUrl" (change)="showPreview($event)">
+          <div class="text-danger" *ngIf="isSubmitted && formControls.imageUrl.errors?.['required']">画像を追加してください。</div>
+      </div>
+    <!-- </form> -->
+    <div class="editor">
+      <div class="detail-title">
+        コーデの詳細
+      </div>
+        <div class="form-title">サイズ</div>
+        <mat-form-field multiple appearance="fill" class="form-block">
+          <mat-label>サイズ</mat-label>
+          <mat-select formControlName="size">
+            <mat-option value="XS">XS</mat-option>
+            <mat-option value="S">S</mat-option>
+            <mat-option value="M">M</mat-option>
+            <mat-option value="L">L</mat-option>
+            <mat-option value="XL">XL</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="form-title">トップス</div>
+        <mat-form-field class="name form-block" appearance="fill">
+          <mat-label>トップス</mat-label>
+          <input matInput formControlName="tops">
+        </mat-form-field>
+        <div class="form-title">ボトムス</div>
+        <mat-form-field class="name form-block" appearance="fill">
+          <mat-label>ボトムス</mat-label>
+          <input matInput formControlName="bottoms">
+          <mat-error>必須入力です</mat-error>
+        </mat-form-field>
+        <ng-container class="form-title" formArrayName="temperature">
+          <div class="title-button">
+            <div class="title">季節</div>
+            <div class="button">
+              <button mat-mini-fab class="add" color="primary" (click)="addTemperature()">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-mini-fab class="delete" color="warn" (click)="removeTemperature()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let temperature of temperature.controls; let i=index">
+            <mat-label>季節</mat-label>
+            <mat-select [formControlName]="i">
+              <mat-option value="春">春</mat-option>
+              <mat-option value="夏">夏</mat-option>
+              <mat-option value="秋">秋</mat-option>
+              <mat-option value="冬">冬</mat-option>
+            </mat-select>
+            <mat-error>必須入力です</mat-error>
+          </mat-form-field>
+        </ng-container>
+        <ng-container class="form-title" formArrayName="weather">
+          <div class="title-button">
+            <div class="title">天気</div>
+            <div class="button">
+              <button mat-mini-fab class="add" color="primary" (click)="addWeather()">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-mini-fab class="delete" color="warn" (click)="removeWeather()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let weather of weather.controls; let i=index">
+            <mat-label>天気</mat-label>
+          <mat-select [formControlName]="i">
+            <mat-option value="晴れ">晴れ</mat-option>
+            <mat-option value="雨">雨</mat-option>
+            <mat-option value="曇り">曇り</mat-option>
+            <mat-option value="雪">雪</mat-option>
+            <mat-option value="全て">全て</mat-option>
+          </mat-select>
+            <mat-error>必須入力です</mat-error>
+          </mat-form-field>
+        </ng-container>
+        <ng-container class="form-title" formArrayName="events">
+          <div class="title-button">
+            <div class="title">イベント</div>
+            <div class="button">
+              <button mat-mini-fab class="add" color="primary" (click)="addEvents()">
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-mini-fab class="delete" color="warn" (click)="removeEvents()">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </div>
+          <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let events of events.controls; let i=index">
+            <mat-label>イベント</mat-label>
+            <mat-select [formControlName]="i">
+              <mat-option value="sunny">晴れ</mat-option>
+              <mat-option value="rainy">雨</mat-option>
+              <mat-option value="cloudy">曇り</mat-option>
+              <mat-option value="snowy">雪</mat-option>
+              <mat-option value="all-weather">全て</mat-option>
+            </mat-select>
+            <mat-error>必須入力です</mat-error>
+          </mat-form-field>
+        </ng-container>
+        <button mat-raised-button color="primary" class="register-button" (click)="onSubmit(clothForm.value)">登録する</button>
+      </div>
     </div>
-    <form class ="form" [formGroup]="clothForm">
-      <div class="form-title">サイズ</div>
-      <mat-form-field multiple appearance="fill" class="form-block">
-        <mat-label>サイズ</mat-label>
-        <mat-select formControlName="size">
-          <mat-option value="XS">XS</mat-option>
-          <mat-option value="S">S</mat-option>
-          <mat-option value="M">M</mat-option>
-          <mat-option value="L">L</mat-option>
-          <mat-option value="XL">XL</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="form-title">トップス</div>
-      <mat-form-field class="name form-block" appearance="fill">
-        <mat-label>トップス</mat-label>
-        <input matInput formControlName="tops">
-      </mat-form-field>
-      <div class="form-title">ボトムス</div>
-      <mat-form-field class="name form-block" appearance="fill">
-        <mat-label>ボトムス</mat-label>
-        <input matInput formControlName="bottoms">
-        <mat-error>必須入力です</mat-error>
-      </mat-form-field>
-      <ng-container class="form-title" formArrayName="temperature">
-        <div class="title-button">
-          <div class="title">季節</div>
-          <div class="button">
-            <button mat-mini-fab class="add" color="primary" (click)="addTemperature()">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-mini-fab class="delete" color="warn" (click)="removeTemperature()">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-        <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let temperature of temperature.controls; let i=index">
-          <mat-label>季節</mat-label>
-          <mat-select [formControlName]="i">
-            <mat-option value="春">春</mat-option>
-            <mat-option value="夏">夏</mat-option>
-            <mat-option value="秋">秋</mat-option>
-            <mat-option value="冬">冬</mat-option>
-          </mat-select>
-          <mat-error>必須入力です</mat-error>
-        </mat-form-field>
-      </ng-container>
-      <ng-container class="form-title" formArrayName="weather">
-        <div class="title-button">
-          <div class="title">天気</div>
-          <div class="button">
-            <button mat-mini-fab class="add" color="primary" (click)="addWeather()">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-mini-fab class="delete" color="warn" (click)="removeWeather()">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-        <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let weather of weather.controls; let i=index">
-          <mat-label>天気</mat-label>
-        <mat-select [formControlName]="i">
-          <mat-option value="晴れ">晴れ</mat-option>
-          <mat-option value="雨">雨</mat-option>
-          <mat-option value="曇り">曇り</mat-option>
-          <mat-option value="雪">雪</mat-option>
-          <mat-option value="全て">全て</mat-option>
-        </mat-select>
-          <mat-error>必須入力です</mat-error>
-        </mat-form-field>
-      </ng-container>
-      <ng-container class="form-title" formArrayName="events">
-        <div class="title-button">
-          <div class="title">イベント</div>
-          <div class="button">
-            <button mat-mini-fab class="add" color="primary" (click)="addEvents()">
-              <mat-icon>add</mat-icon>
-            </button>
-            <button mat-mini-fab class="delete" color="warn" (click)="removeEvents()">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-        <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let events of events.controls; let i=index">
-          <mat-label>イベント</mat-label>
-          <mat-select [formControlName]="i">
-            <mat-option value="sunny">晴れ</mat-option>
-            <mat-option value="rainy">雨</mat-option>
-            <mat-option value="cloudy">曇り</mat-option>
-            <mat-option value="snowy">雪</mat-option>
-            <mat-option value="all-weather">全て</mat-option>
-          </mat-select>
-          <mat-error>必須入力です</mat-error>
-        </mat-form-field>
-      </ng-container>
-    </form>
-    <button mat-raised-button color="primary" class="register-button" (click)="createCloth()">登録する</button>
-  </div>
+  </form>
 </div>

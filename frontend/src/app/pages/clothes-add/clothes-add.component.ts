@@ -3,6 +3,9 @@ import { FormArray, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClothesRepoService } from 'src/app/repositories/clothes-repo.service';
 import { UserService } from 'src/app/services/user.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-clothes-add',
@@ -17,6 +20,7 @@ export class ClothesAddComponent implements OnInit {
   public event_arr = '{'
 
   public clothForm = this.fb.group({
+    imageUrl: ['',Validators.required],
     size: ['', Validators.required],
     tops: [''],
     bottoms: [''],
@@ -46,11 +50,13 @@ export class ClothesAddComponent implements OnInit {
     private fb: FormBuilder,
     private userSvc: UserService,
     public router: Router,
-    private clothesRepoSvc: ClothesRepoService
+    private clothesRepoSvc: ClothesRepoService,
+    private storage:AngularFireStorage
   ) { }
 
-  ngOnInit(): void {
+  ngOnInit(){
     this.userId = this.userSvc.user$.getValue().id
+    this.resetFrom();
   }
 
   get weather() {
@@ -124,7 +130,7 @@ export class ClothesAddComponent implements OnInit {
 
     const body = {
       'userid': this.userId,
-      "cloth": "test1.com",
+      "cloth": this.imgUrl,
       "details": this.details,
       "weather": this.weather_arr,
       "temperature": this.temperature_arr,
@@ -135,4 +141,63 @@ export class ClothesAddComponent implements OnInit {
     })
   }
 
+  imgSrc : string='../assets/placeholder.jpg';
+  imgUrl : string | undefined;
+  selectedImage: any = null;
+  isSubmitted:boolean=false;
+
+  // formTemplate = new FormGroup({
+  //   imageUrl : new FormControl('',Validators.required),
+  // })
+
+  showPreview(event:any){
+    if(event.target.files && event.target.files[0]){
+      const reader = new FileReader();
+      reader.onload = (e:any) => this.imgSrc = e.target.result;
+      reader.readAsDataURL(event.target.files[0]);
+      this.selectedImage = event.target.files[0];
+    }else{
+      this.imgSrc = '../assets/placeholder.jpg';
+      this.selectedImage = null;
+    }
+  }
+
+  onSubmit(fromValue:any){
+    this.isSubmitted = true;
+    if(this.clothForm.valid){
+      var filePath = `images/${this.selectedImage.name}_${new Date().getTime()}`
+      const fileRef = this.storage.ref(filePath);
+      this.storage.upload(filePath,this.selectedImage).snapshotChanges().pipe(
+        finalize(()=>{
+          fileRef.getDownloadURL().subscribe((url)=>{
+            console.log(url);
+            this.imgUrl = url;
+            this.createCloth();
+            fromValue['imageUrl']=url;
+            this.resetFrom();
+          })
+        })
+      ).subscribe();
+    }
+  }
+
+  get formControls(){
+    return this.clothForm['controls'];
+  }
+
+  resetFrom(){
+    this.clothForm.reset();
+    this.clothForm.setValue({
+      imageUrl:'',
+    size: '',
+    tops: '',
+    bottoms: '',
+    weather: [],
+    temperature: [],
+    events: []
+    });
+    this.imgSrc = '../assets/placeholder.jpg';
+    this.selectedImage = null;
+    this.isSubmitted=false;
+  }
 }

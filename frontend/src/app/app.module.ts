@@ -16,7 +16,6 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { environment } from '../environments/environment';
-import { ImageComponent } from './pages/image/image.component';
 import { AngularFireDatabaseModule } from "@angular/fire/compat/database";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -27,7 +26,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     ClothesListComponent,
     FooterComponent,
-    ImageComponent,
     ClothesEditComponent,
     ClothesAddComponent,
   ],
