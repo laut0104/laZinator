@@ -1,18 +1,26 @@
 <app-header></app-header>
 <div class="container">
   <div class="page-title">
-    <button mat-icon-button class="back">
-      <mat-icon>
-        arrow_back_ios_new
-      </mat-icon>
-      戻る
-    </button>
+    <div class="back-button">
+        <button mat-icon-button class="back">
+        <mat-icon>
+            arrow_back_ios_new
+        </mat-icon>
+        </button>
+        <div class="back-title">戻る</div>
+    </div>
     <h2 class="title">コーデの情報を入力</h2>
   </div>
-  <div class="clothes">
-  <div class="img">
-    <img class="clothes-img" src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-  </div>
+    <div class="clothes">
+        <div class="img">
+            <input type="file" style="display:none" accept="image/*">
+            <button mat-icon-button class="photo-add" type="submit">
+                <mat-icon>
+                    add_photo_alternate
+                </mat-icon>    
+            </button>
+        </div>
+    </div>
   <div class="editor">
     <div class="detail-title">
       コーデの詳細
@@ -22,28 +30,37 @@
       <mat-form-field multiple appearance="fill" class="form-block">
         <mat-label>サイズ</mat-label>
         <mat-select formControlName="size">
-          <mat-option value="XS">XS</mat-option>
-          <mat-option value="S">S</mat-option>
-          <mat-option value="M">M</mat-option>
-          <mat-option value="L">L</mat-option>
-          <mat-option value="XL">XL</mat-option>
+          <mat-option value="135-140">135-140cm</mat-option>
+          <mat-option value="140-145">140-145cm</mat-option>
+          <mat-option value="145-150">145-150cm</mat-option>
+          <mat-option value="150-155">150-155cm</mat-option>
+          <mat-option value="155-160">155-160cm</mat-option>
+          <mat-option value="160-165">160-165cm</mat-option>
+          <mat-option value="165-170">165-170cm</mat-option>
+          <mat-option value="170-175">170-175cm</mat-option>
+          <mat-option value="175-180">175-180cm</mat-option>
+          <mat-option value="180-185">180-185cm</mat-option>
+          <mat-option value="185-190">185-190cm</mat-option>
+          <mat-option value="190-195">190-195cm</mat-option>
+          <mat-option value="195-200">195-200cm</mat-option>
         </mat-select>
       </mat-form-field>
-      <div class="form-title">トップス</div>
+      <div class="form-title">ブランド（トップス）</div>
       <mat-form-field class="name form-block" appearance="fill">
-        <mat-label>トップス</mat-label>
+        <mat-label>ブランド（トップス）</mat-label>
         <input matInput formControlName="tops">
+        <mat-error>必須入力です</mat-error>
       </mat-form-field>
-      <div class="form-title">ボトムス</div>
+      <div class="form-title">ブランド（ボトムス）</div>
       <mat-form-field class="name form-block" appearance="fill">
-        <mat-label>ボトムス</mat-label>
+        <mat-label>ブランド（ボトムス）</mat-label>
         <input matInput formControlName="bottoms">
         <mat-error>必須入力です</mat-error>
       </mat-form-field>
       <ng-container class="form-title" formArrayName="temperature">
         <div class="title-button">
-          <div class="title">季節</div>
-          <div class="button">
+          <div class="form-title">季節</div>
+          <div class="edit-button">
             <button mat-mini-fab class="add" color="primary" (click)="addTemperature()">
               <mat-icon>add</mat-icon>
             </button>
@@ -63,10 +80,10 @@
           <mat-error>必須入力です</mat-error>
         </mat-form-field>
       </ng-container>
-      <ng-container class="form-title" formArrayName="weather">
+      <ng-container formArrayName="weather">
         <div class="title-button">
-          <div class="title">天気</div>
-          <div class="button">
+          <div class="form-title">天気</div>
+          <div class="edit-button">
             <button mat-mini-fab class="add" color="primary" (click)="addWeather()">
               <mat-icon>add</mat-icon>
             </button>
@@ -87,10 +104,10 @@
           <mat-error>必須入力です</mat-error>
         </mat-form-field>
       </ng-container>
-      <ng-container class="form-title" formArrayName="events">
+      <ng-container formArrayName="events">
         <div class="title-button">
-          <div class="title">イベント</div>
-          <div class="button">
+          <div class="form-title">イベント</div>
+          <div class="edit-button">
             <button mat-mini-fab class="add" color="primary" (click)="addEvents()">
               <mat-icon>add</mat-icon>
             </button>
@@ -102,17 +119,18 @@
         <mat-form-field multiple appearance="fill" class="form-block" *ngFor="let events of events.controls; let i=index">
           <mat-label>イベント</mat-label>
           <mat-select [formControlName]="i">
-            <mat-option value="sunny">晴れ</mat-option>
-            <mat-option value="rainy">雨</mat-option>
-            <mat-option value="cloudy">曇り</mat-option>
-            <mat-option value="snowy">雪</mat-option>
-            <mat-option value="all-weather">全て</mat-option>
+            <mat-option value="アウトドア">アウトドア（スポーツ、キャンプ）</mat-option>
+            <mat-option value="インドア">インドア（カフェ、博物館）</mat-option>
+            <mat-option value="デート">デート</mat-option>
+            <mat-option value="グルメ">グルメ</mat-option>
+            <mat-option value="オフィス">オフィス</mat-option>
+            <mat-option value="カジュアル">カジュアル</mat-option>
           </mat-select>
           <mat-error>必須入力です</mat-error>
         </mat-form-field>
       </ng-container>
     </form>
-    <button mat-raised-button color="primary" class="register-button" (click)="createCloth()">登録する</button>
   </div>
+    <button mat-raised-button color="primary" class="register-button" (click)="createCloth()">登録する</button>
 </div>
 <app-footer></app-footer>
