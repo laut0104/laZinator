@@ -9,6 +9,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { HeaderComponent } from './components/header/header.component';
 import { ClothesListComponent } from './pages/clothes-list/clothes-list.component';
+import { ClothesEditComponent } from './pages/clothes-edit/clothes-edit.component';
 import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
     LiffInitComponent,
     HeaderComponent,
     ClothesListComponent,
-    ClothesAddComponent
+    ClothesEditComponent,
+    ClothesAddComponent,
   ],
   imports: [
     BrowserModule,
