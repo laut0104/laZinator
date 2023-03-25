@@ -4,7 +4,7 @@
     "secure": true,
     "changeOrigin": true,
     "pathRewrite": {
-    "^/api": "https://2ce9-103-5-140-185.jp.ngrok.io/"
+      "^/api": "https://2ce9-103-5-140-185.jp.ngrok.io/"
     },
     "logLevel": "debug"
   }
