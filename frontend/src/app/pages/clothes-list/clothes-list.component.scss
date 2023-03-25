@@ -89,4 +89,12 @@
     width: 50%;
     text-align: center;
   }
+
+  .cloth-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+  }
 }
