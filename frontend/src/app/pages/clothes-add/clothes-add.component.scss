@@ -34,6 +34,17 @@
     }
   }
 
+  .title-button{
+    display: flex;
+    flex-direction: row;
+    .button{
+      margin-left: 1.5em;
+      .add{
+        margin-right:0.8em;
+      }
+    }
+  }
+
   .editor{
     width: 80%;
     margin:0 auto;

@@ -12,6 +12,7 @@ import { ClothesListComponent } from './pages/clothes-list/clothes-list.componen
 import { ClothesEditComponent } from './pages/clothes-edit/clothes-edit.component';
 import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FooterComponent } from './components/footer/footer.component';
     ClothesListComponent,
     ClothesEditComponent,
     ClothesAddComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,6 +30,8 @@ import { FooterComponent } from './components/footer/footer.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
