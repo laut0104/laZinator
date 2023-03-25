@@ -33,6 +33,38 @@ type JwtClaims struct {
 	jwt.RegisteredClaims
 }
 
+type OpenWeatherMapAPIResponse struct {
+	Main    Main      `json:"main"`
+	Weather []Weather `json:"weather"`
+	Coord   Coord     `json:"coord"`
+	Wind    Wind      `json:"wind"`
+	Dt      int64     `json:"dt"`
+}
+
+type Main struct {
+	Temp     float64 `json:"temp"`
+	TempMin  float64 `json:"temp_min"`
+	TempMax  float64 `json:"temp_max"`
+	Pressuer int     `json:"pressure"`
+	Humidity int     `json:"humidity"`
+}
+
+type Coord struct {
+	Lon float64 `json:"lon"`
+	Lat float64 `json:"lat"`
+}
+
+type Weather struct {
+	Main        string `json:"main"`
+	Description string `json:"description"`
+	Icon        string `json:"icon"`
+}
+
+type Wind struct {
+	Speed float64 `json:"speed"`
+	Deg   int     `json:"deg"`
+}
+
 func main() {
 	fmt.Println("Hello")
 	// // インスタンスを作成
@@ -52,6 +84,7 @@ func main() {
 	e.GET("/cloth/:id", handler.GetCloth)
 	e.PUT("/cloth/:id", handler.UpdateCloth)
 	e.DELETE("/cloth/:id", handler.DeleteCloth)
+	e.GET("/temp", GetTemperature)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
@@ -102,4 +135,53 @@ func login(c echo.Context) error {
 	return c.JSON(http.StatusOK, echo.Map{
 		"token": token,
 	})
+}
+
+func GetTemperature(c echo.Context) error {
+	token := "6beffb309ba1da1d671c15746524791d" // APIトークン
+	// city := "Tokyo,jp"                                            // 東京を指定
+	endPoint := "https://api.openweathermap.org/data/2.5/weather" // APIのエンドポイント
+
+	// パラメータを設定
+	values := url.Values{}
+	values.Set("lat", "35.68")
+	values.Set("lon", "139.77")
+	values.Set("APPID", token)
+	values.Set("units", "metric")
+
+	target := endPoint + "?" + values.Encode()
+	fmt.Println(target)
+
+	req, err := http.NewRequest(
+		"GET",
+		target,
+		nil,
+	)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+
+	req.Header.Add("Content-Type", `application/json"`)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	defer resp.Body.Close()
+
+	byteArray, err := io.ReadAll(resp.Body)
+	fmt.Println(byteArray)
+	res := new(OpenWeatherMapAPIResponse)
+	if err != nil {
+		fmt.Println("Error")
+	}
+	err = json.Unmarshal(byteArray, &res)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(res)
+	return c.NoContent(200)
 }
