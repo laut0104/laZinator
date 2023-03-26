@@ -5,6 +5,7 @@ import { ClothesEditComponent } from './pages/clothes-edit/clothes-edit.componen
 import { ClothesListComponent } from './pages/clothes-list/clothes-list.component';
 import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 import { LiffInitComponent } from './pages/liff-init/liff-init.component';
+import { ClothesDetailsComponent } from './pages/clothes-details/clothes-details.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
     path: 'clothes-list',
     canActivate: [AuthGuard],
     component: ClothesListComponent,
+  },
+  {
+    path: 'clothes-detail/:id',
+    canActivate: [AuthGuard],
+    component: ClothesDetailsComponent,
   },
   {
     path: 'clothes-edit',

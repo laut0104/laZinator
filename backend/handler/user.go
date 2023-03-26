@@ -53,3 +53,18 @@ func GetUser(c echo.Context) error {
 	return c.JSON(http.StatusOK, u)
 
 }
+
+func GetLineUserIdById(uid string) string {
+	db := OpenDB()
+	defer db.Close()
+
+	u := new(User)
+	err := db.QueryRow(`SELECT * FROM users where id=$1`, uid).Scan(&u.Id, &u.Lineuserid, &u.Username)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(*u)
+
+	return u.Lineuserid
+}

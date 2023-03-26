@@ -10,6 +10,13 @@ export class LiffInitComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    navigator.geolocation.getCurrentPosition(this.successCallback, this.errorCallback);
   }
 
+  successCallback(position: any) {
+    console.log(position)
+  }
+  errorCallback(error: any){
+    console.log(error)
+  }
 }

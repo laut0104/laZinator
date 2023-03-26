@@ -1,6 +1,10 @@
 package handler
 
 import (
+	// "crypto/rand"
+	"math/rand"
+	"time"
+
 	_ "github.com/lib/pq"
 
 	"fmt"
@@ -55,7 +59,7 @@ func GetCloth(c echo.Context) error {
 	db := OpenDB()
 	defer db.Close()
 	id := c.Param("id")
-	uid := c.QueryParam("id")
+	uid := c.Request().Header.Get("User_id")
 	cloth := new(Cloth)
 	err := db.QueryRow(`SELECT * FROM clothes where id=$1 and userid=$2 `, id, uid).Scan(&cloth.Id, &cloth.Userid, &cloth.Cloth, &cloth.Details, &cloth.Weather, &cloth.Temperature, &cloth.Events)
 	if err != nil {
@@ -65,6 +69,68 @@ func GetCloth(c echo.Context) error {
 
 	fmt.Println(cloth)
 	return c.JSON(http.StatusOK, cloth)
+}
+
+func GetProposeCloth(season []string, uid string) Cloth {
+	db := OpenDB()
+	defer db.Close()
+
+	fmt.Println(season)
+	// AND temperature = ANY($2::text[])
+	clothes := Clothes{}
+	cloth := new(Cloth)
+
+	if len(season) == 1 {
+		rows, err := db.Query(`SELECT * FROM clothes where userid=$1 and $2=any(temperature)`, uid, season[0])
+		if err != nil {
+			fmt.Println("db_err")
+			fmt.Println(err)
+		}
+		defer rows.Close()
+		if !rows.Next() {
+			rows, err = db.Query(`SELECT * FROM clothes where userid=$1`, uid)
+			if err != nil {
+				fmt.Println("db_err")
+				fmt.Println(err)
+			}
+		}
+		for rows.Next() {
+			err := rows.Scan(&cloth.Id, &cloth.Userid, &cloth.Cloth, &cloth.Details, &cloth.Weather, &cloth.Temperature, &cloth.Events)
+			if err != nil {
+				fmt.Println(err)
+				// return err
+			}
+			clothes.Clothes = append(clothes.Clothes, *cloth)
+		}
+	} else {
+		rows, err := db.Query(`SELECT * FROM clothes where userid=$1 and ($2 = any(temperature) or $3 = any(temperature))`, uid, season[0], season[1])
+		if err != nil {
+			fmt.Println("db_err")
+			fmt.Println(err)
+		}
+		defer rows.Close()
+		if !rows.Next() {
+			rows, err = db.Query(`SELECT * FROM clothes where userid=$1`, uid)
+			if err != nil {
+				fmt.Println("db_err")
+				fmt.Println(err)
+			}
+		}
+		for rows.Next() {
+			err := rows.Scan(&cloth.Id, &cloth.Userid, &cloth.Cloth, &cloth.Details, &cloth.Weather, &cloth.Temperature, &cloth.Events)
+			if err != nil {
+				fmt.Println(err)
+				// return err
+			}
+			clothes.Clothes = append(clothes.Clothes, *cloth)
+		}
+	}
+
+	rand.Seed(time.Now().UnixNano())
+	length := len(clothes.Clothes)
+	randNum := rand.Intn(length)
+
+	return clothes.Clothes[randNum]
 }
 
 func AddCloth(c echo.Context) error {

@@ -6,8 +6,8 @@ export const environment = {
   production: false,
   ngrokSkipBrowserWarning: true,
   apiUrl: '/api',
-  LIFF_ID: '1660758429-leyZWamm',
-  
+  LIFF_ID: '1660758429-GMo1JYaa',
+
   firebase: {
     apiKey: "AIzaSyCGvUJTmOsYModcvpBBSdZH0YlRpbABQto",
     authDomain: "lazinator-demo.firebaseapp.com",

@@ -65,6 +65,11 @@ type Wind struct {
 	Deg   int     `json:"deg"`
 }
 
+type Position struct {
+	Lat string `json:"lat"`
+	Lon string `json:"lon"`
+}
+
 func main() {
 	fmt.Println("Hello")
 	// // インスタンスを作成
@@ -85,6 +90,7 @@ func main() {
 	e.PUT("/cloth/:id", handler.UpdateCloth)
 	e.DELETE("/cloth/:id", handler.DeleteCloth)
 	e.GET("/temp", GetTemperature)
+	e.POST("/propose", ProposeCloth)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }
@@ -138,23 +144,20 @@ func login(c echo.Context) error {
 }
 
 func GetTemperature(c echo.Context) error {
-	token := "6beffb309ba1da1d671c15746524791d" // APIトークン
-	// city := "Tokyo,jp"                                            // 東京を指定
+	token := "6beffb309ba1da1d671c15746524791d"                   // APIトークン
 	endPoint := "https://api.openweathermap.org/data/2.5/weather" // APIのエンドポイント
-
-	lat := c.QueryParam("lat")
-	lon := c.QueryParam("lon")
-
-	fmt.Println(lat, lon)
+	// lat := c.QueryParam("lat")
+	// lon := c.QueryParam("lon")
 
 	// パラメータを設定
 	values := url.Values{}
-	values.Set("lat", lat)
-	values.Set("lon", lon)
+	values.Set("lat", "35.68")
+	values.Set("lon", "139.77")
 	values.Set("APPID", token)
 	values.Set("units", "metric")
 
 	target := endPoint + "?" + values.Encode()
+	fmt.Println(target)
 
 	req, err := http.NewRequest(
 		"GET",
@@ -177,6 +180,7 @@ func GetTemperature(c echo.Context) error {
 	defer resp.Body.Close()
 
 	byteArray, err := io.ReadAll(resp.Body)
+	fmt.Println(byteArray)
 	res := new(OpenWeatherMapAPIResponse)
 	if err != nil {
 		fmt.Println("Error")
@@ -186,5 +190,88 @@ func GetTemperature(c echo.Context) error {
 		fmt.Println(err)
 	}
 	fmt.Println(res)
-	return c.JSON(http.StatusOK, res)
+	return c.NoContent(200)
+}
+
+func ProposeCloth(c echo.Context) error {
+	pos := new(Position)
+	uid := c.Request().Header.Get("User_id")
+
+	lineId := handler.GetLineUserIdById(uid)
+	fmt.Println(lineId)
+
+	if err := c.Bind(pos); err != nil {
+		fmt.Println(err)
+	}
+	if pos.Lat == "" {
+		fmt.Println("test")
+	}
+
+	res := GetTemp(pos.Lat, pos.Lon)
+
+	var season []string
+
+	if res.Main.Temp <= 10 {
+		season = append(season, "冬")
+		// season = "冬"
+	} else if res.Main.Temp >= 20 {
+		season = append(season, "夏")
+		// season = "夏"
+	} else {
+		season = append(season, "春")
+		// season = "春"
+		season = append(season, "秋")
+	}
+
+	cloth := handler.GetProposeCloth(season, uid)
+	handler.PushMessage(cloth, lineId)
+
+	fmt.Println(cloth)
+	return c.NoContent(200)
+	// res := GetTemp(lat, lon)
+
+}
+
+func GetTemp(lat, lon string) *OpenWeatherMapAPIResponse {
+	token := "6beffb309ba1da1d671c15746524791d"                   // APIトークン
+	endPoint := "https://api.openweathermap.org/data/2.5/weather" // APIのエンドポイント
+
+	// パラメータを設定
+	values := url.Values{}
+	values.Set("lat", lat)
+	values.Set("lon", lon)
+	values.Set("APPID", token)
+	values.Set("units", "metric")
+
+	target := endPoint + "?" + values.Encode()
+
+	req, err := http.NewRequest(
+		"GET",
+		target,
+		nil,
+	)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	req.Header.Add("Content-Type", `application/json"`)
+
+	client := &http.Client{}
+	resp, err := client.Do(req)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer resp.Body.Close()
+
+	byteArray, err := io.ReadAll(resp.Body)
+	res := new(OpenWeatherMapAPIResponse)
+	if err != nil {
+		fmt.Println("Error")
+	}
+	err = json.Unmarshal(byteArray, &res)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(res)
+	return res
 }

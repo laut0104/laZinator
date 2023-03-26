@@ -12,6 +12,7 @@ import { ClothesListComponent } from './pages/clothes-list/clothes-list.componen
 import { ClothesEditComponent } from './pages/clothes-edit/clothes-edit.component';
 import { ClothesAddComponent } from './pages/clothes-add/clothes-add.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ClothesDetailsComponent } from './pages/clothes-details/clothes-details.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
@@ -26,6 +27,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HeaderComponent,
     ClothesListComponent,
     FooterComponent,
+    ClothesDetailsComponent,
     ClothesEditComponent,
     ClothesAddComponent,
   ],
