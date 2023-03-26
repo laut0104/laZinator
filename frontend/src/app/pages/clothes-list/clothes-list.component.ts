@@ -12,7 +12,7 @@ import { AngularFireStorage } from '@angular/fire/compat/storage';
 export class ClothesListComponent implements OnInit {
   public userId: number = 0;
   public clothes: any[] = [];
-  public weathers: string[] = [];
+  public temperatures: string[] = [];
   imgUrl: string[]=[];
 
   constructor(
@@ -25,20 +25,17 @@ export class ClothesListComponent implements OnInit {
   ngOnInit(): void {
     this.userId = this.userSvc.user$.getValue().id
     this.getClothes();
-
-    this.storage.ref('images/test.jpg').getDownloadURL().subscribe(image => {
-      this.imgUrl = image;
-    });
   }
 
   public getClothes() {
     const query = {}
     this.clothesRepoSvc.getClothes(query).subscribe((res: any) => {
       if(res.clothes){
+        console.log(res.clothes);
         this.clothes = res.clothes;
         this.clothes.forEach((cloth, index) => {
-          cloth.weather = cloth.weather.slice(1,-1)
-          this.clothes[index].weathers = cloth.weather.split(',')
+          cloth.temperature = cloth.temperature.slice(1,-1)
+          this.clothes[index].temperatures = cloth.temperature.split(',')
         })
       }
     })
