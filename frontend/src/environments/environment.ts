@@ -6,7 +6,17 @@ export const environment = {
   production: false,
   ngrokSkipBrowserWarning: true,
   apiUrl: '/api',
-  LIFF_ID: '1660758429-GMo1JYaa',
+  LIFF_ID: '1660758429-leyZWamm',
+
+  firebase: {
+    apiKey: "AIzaSyCGvUJTmOsYModcvpBBSdZH0YlRpbABQto",
+    authDomain: "lazinator-demo.firebaseapp.com",
+    projectId: "lazinator-demo",
+    storageBucket: "lazinator-demo.appspot.com",
+    messagingSenderId: "416823229825",
+    appId: "1:416823229825:web:7d9ce3d05aa8a51f557c80",
+    measurementId: "G-JL2FD3DZQ7"
+  }
 };
 
 /*

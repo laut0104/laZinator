@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="container">
   <div class="page-title">
-    <button mat-icon-button class="back">
+    <button mat-icon-button class="back" routerLink="/clothes-list">
       <mat-icon>
         arrow_back_ios_new
       </mat-icon>
@@ -11,7 +11,7 @@
   </div>
   <div class="clothes">
       <div>
-           <img class="image" src="https://material.angular.io/assets/img/examples/shiba2.jpg">
+           <img class="image" src={{clothes.cloth}}>
       </div>
   </div>
     <div class="editor">
@@ -21,27 +21,29 @@
       <table class="clothes-details-table">
         <tr>
             <th>サイズ</th>
-            <td>160cm</td>
+            <td>{{clothes.all_details[0]}}</td>
         </tr>
         <tr>
             <th>ブランド<br>(トップス)</th>
-            <td>アディダス</td>
+            <td *ngIf="clothes.all_details[1]==='null' || clothes.all_details[1]==='NULL'">なし</td>
+            <td *ngIf="clothes.all_details[1] !='null' && clothes.all_details[1] !='NULL'">{{clothes.all_details[1]}}</td>
         </tr>
         <tr>
             <th>ブランド<br>(ボトムス)</th>
-            <td>アーノルドパーマー</td>
+            <td *ngIf="clothes.all_details[2]==='null' || clothes.all_details[2]=== 'NULL'">なし</td>
+            <td *ngIf="clothes.all_details[2] != 'null' && clothes.all_details[2] != 'NULL'">{{clothes.all_details[2]}}</td>
         </tr>
         <tr>
             <th>季節</th>
-            <td>夏</td>
+            <td>{{clothes.temperatures}}</td>
         </tr>
         <tr>
             <th>天気</th>
-            <td>雨</td>
+            <td>{{clothes.weathers}}</td>
         </tr>
         <tr>
             <th>イベント</th>
-            <td>買い物</td>
+            <td>{{clothes.all_events}}</td>
         </tr>
       </table>
     </div>

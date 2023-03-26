@@ -16,4 +16,12 @@ export class ClothesRepoService {
   ): Observable<any> {
     return this.apiSvc.get(`clothes`, query)
   }
+  
+  public getCloth(
+    id: number,
+    query: any
+  ): Observable<any> {
+    return this.apiSvc.get(`cloth/${id}`, query)
+  }
+  
 }
