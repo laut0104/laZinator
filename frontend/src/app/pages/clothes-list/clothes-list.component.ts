@@ -54,7 +54,7 @@ export class ClothesListComponent implements OnInit {
           "lat": latitude,
           "lon": longitude,
         }
-        this.proposeSvc.getTemp(body).subscribe((res) => console.log(res))
+        this.proposeSvc.proposeCloth(body).subscribe((res) => console.log(res))
         console.log("Latitude: " + latitude + " Longitude: " + longitude);
       }, (error) => {
         console.log(error);

@@ -11,9 +11,9 @@ export class ProposeService {
     private apiSvc: ApiService
   ) { }
 
-  public getTemp(
-    query: any
+  public proposeCloth(
+    body: any
   ): Observable<any> {
-    return this.apiSvc.get(`temp`, query)
+    return this.apiSvc.post(`propose`, body)
   }
 }
