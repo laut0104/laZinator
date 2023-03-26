@@ -1,0 +1,76 @@
+@use "src/styles/styles";
+
+.container {
+  @include styles.container;
+  .page-title {
+    display: flex;
+    align-items: center;
+    .back{
+      margin-top: 0.7em;
+      margin-left: 2em;
+    }
+    .title{
+      margin-top: 1.5em;
+      margin-left: 3em;
+    }
+  }
+  .img {
+    display: flex;
+    justify-content: center;
+    .clothes-img{
+      width:70%
+    }
+  }
+  .clothes {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    .example-card {
+      flex: 1,1;
+      // margin-left: 5px;
+      // margin-right: 10px;
+      width: 40%;
+    }
+  }
+  .editor{
+    width: 80%;
+    margin:0 auto;
+  }
+
+  .detail-title{
+    margin-bottom: 0.5em;
+    margin-top: 0.7em;
+    border-bottom: 1px solid #652CB3;
+  }
+
+  .image{
+    width: 300px;
+    height: auto;
+  }
+
+table{
+    border-collapse: separate;
+    border-spacing: 0px 5px;
+    margin: 0 auto;
+    margin-bottom: 1.5em;
+    width: 100%;
+  }
+  td,th{
+    padding: 20px 2px;
+    font-size: smaller;
+  }
+  th{
+    background: #E6E6FA;
+    color: black;
+    position: sticky;
+  }
+  td{
+    background: #F5F5F5;
+    text-align: center;
+    width: 50%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
