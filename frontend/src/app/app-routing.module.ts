@@ -17,7 +17,7 @@ const routes: Routes = [
     component: ClothesListComponent,
   },
   {
-    path: 'clothes-details',
+    path: 'clothes-detail/:id',
     canActivate: [AuthGuard],
     component: ClothesDetailsComponent,
   },

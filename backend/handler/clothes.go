@@ -55,7 +55,7 @@ func GetCloth(c echo.Context) error {
 	db := OpenDB()
 	defer db.Close()
 	id := c.Param("id")
-	uid := c.QueryParam("id")
+	uid := c.Request().Header.Get("User_id")
 	cloth := new(Cloth)
 	err := db.QueryRow(`SELECT * FROM clothes where id=$1 and userid=$2 `, id, uid).Scan(&cloth.Id, &cloth.Userid, &cloth.Cloth, &cloth.Details, &cloth.Weather, &cloth.Temperature, &cloth.Events)
 	if err != nil {
