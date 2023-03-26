@@ -244,7 +244,6 @@ func GetTemp(lat, lon string) *OpenWeatherMapAPIResponse {
 	values.Set("units", "metric")
 
 	target := endPoint + "?" + values.Encode()
-	fmt.Println(target)
 
 	req, err := http.NewRequest(
 		"GET",
@@ -265,7 +264,6 @@ func GetTemp(lat, lon string) *OpenWeatherMapAPIResponse {
 	defer resp.Body.Close()
 
 	byteArray, err := io.ReadAll(resp.Body)
-	fmt.Println(byteArray)
 	res := new(OpenWeatherMapAPIResponse)
 	if err != nil {
 		fmt.Println("Error")

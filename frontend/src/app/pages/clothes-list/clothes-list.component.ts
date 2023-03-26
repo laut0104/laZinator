@@ -3,6 +3,7 @@ import { Cloth } from 'src/app/models/model';
 import { ClothesRepoService } from 'src/app/repositories/clothes-repo.service';
 import { ProposeService } from 'src/app/services/propose.service';
 import { UserService } from 'src/app/services/user.service';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
 
 @Component({
   selector: 'app-clothes-list',
@@ -15,6 +16,8 @@ export class ClothesListComponent implements OnInit {
   public weathers: string[] = [];
   public lat: string | null = "";
   public lon: string | null = "";
+  public temperatures: string[] = [];
+  imgUrl: string[]=[];
 
   constructor(
     public userSvc: UserService,
@@ -31,10 +34,11 @@ export class ClothesListComponent implements OnInit {
     const query = {}
     this.clothesRepoSvc.getClothes(query).subscribe((res: any) => {
       if(res.clothes){
+        console.log(res.clothes);
         this.clothes = res.clothes;
         this.clothes.forEach((cloth, index) => {
-          cloth.weather = cloth.weather.slice(1,-1)
-          this.clothes[index].weathers = cloth.weather.split(',')
+          cloth.temperature = cloth.temperature.slice(1,-1)
+          this.clothes[index].temperatures = cloth.temperature.split(',')
         })
       }
     })
