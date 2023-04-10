@@ -17,8 +17,8 @@ func Line(c echo.Context) error {
 	bot, err := linebot.New(
 		// 	// os.Getenv("LINE_BOT_CHANNEL_SECRET"),
 		// 	// os.Getenv("LINE_BOT_CHANNEL_TOKEN"),
-		"4cf0db89d3cf7ee2c74b2246e2fc1a86",
-		"zvQy56BQ1RAidm8tPbwNHHduaWrW7w7TWKdn891VMnkEmwtLorPfUUVLQlYskeOnCZJhBTP8gfvWarKstni+rkMoXcIAP3gxrbVQBvLWy0nBB/rw1hIRwnWwd6vzCrK2L7UHOuCdGT+eGhw6HD2m9AdB04t89/1O/w1cDnyilFU=",
+		"0eeb5550fe74acad428d9dcde42f2684",
+		"2OeWynHvMPKxzpumMLjBEqjP/LIx0wUFH9K4CodnbFpJcp+bZdY/xHbIPuRSavlvMt6etI9WzhVynW38pwjCNl4qMp8EVdAnWIMJ/T1nIunYKuJUONcoyrUXMnNHXoP5Cjr7TTSf+VWea/d9XbektAdB04t89/1O/w1cDnyilFU=",
 	)
 	events, err := bot.ParseRequest(c.Request())
 	if err != nil {
@@ -258,34 +258,46 @@ func PushMessage(cloth Cloth, lineId string) {
 		},
 		"footer": {
 			"type": "box",
-			"layout": "horizontal",
+			"layout": "vertical",
 			"contents": [
-			{
-				"type": "button",
-				"action": {
-					"type": "postback",
-					"label": "他のは？",
-					"data": "hello"
-				  },
-				"flex": 1,
-				"style": "secondary",
-				"margin": "none"
-			},
-			{
-				"type": "button",
-				"action": {
-					"type": "uri",
-					"label": "詳細",
-					"uri": "` + link + `"
-				},
-				"flex": 1,
-				"style": "secondary",
-				"margin": "md"
+				{
+					"type": "box",
+					"layout": "horizontal",
+					"contents": [
+					{
+						"type": "button",
+						"action": {
+						"type": "postback",
+						"label": "他のは？",
+						"data": "hello"
+					},
+						"flex": 1,
+						"style": "secondary",
+						"margin": "md",
+						"gravity": "center"
+					},
+					{
+						"type": "separator",
+						"color": "#FFFFFF",
+						"margin": "10px"
+					},
+					{
+						"type": "button",
+						"action": {
+							"type": "uri",
+							"label": "詳細",
+							"uri": "` + link + `"
+						},
+						"flex": 1,
+						"style": "secondary",
+						"margin": "none",
+						"gravity": "center"
+					}
+					],
+					"height": "60px"
+				}
+			]
 			}
-			],
-			"height": "60px",
-			"paddingBottom": "30px"
-		}
 		}`
 	fmt.Println(json)
 	jsonData := []byte(json)
